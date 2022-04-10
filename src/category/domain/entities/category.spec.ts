@@ -1,6 +1,6 @@
 import { Category, CategoryProperties } from "./category";
 import { omit } from 'lodash';
-import UniqueEntityId from "../shared/domain/value-objects/unique-entity-id.vo";
+import UniqueEntityId from "../../shared/domain/value-objects/unique-entity-id.vo";
 
 describe("Category Tests", () => {
     test('constructor of category', () => {
@@ -155,7 +155,7 @@ describe("Category Tests", () => {
         data.forEach((v) => {
             const category = new Category(v.props, v.id);
             expect(category.id).not.toBeNull();
-            expect(category.id).toBeInstanceOf(UniqueEntityId);
+            expect(category.uniqueEntityId).toBeInstanceOf(UniqueEntityId);
         })
     });
 });
