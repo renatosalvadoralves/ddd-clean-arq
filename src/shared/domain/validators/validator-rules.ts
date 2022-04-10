@@ -1,4 +1,4 @@
-import ValidationError from "../errors/validation-error";
+import { ValidationError } from "../errors/validation-error";
 // we can create constants with error messages
 export default class ValidatorRules {
     private constructor(private value: any, private property: string) { }
