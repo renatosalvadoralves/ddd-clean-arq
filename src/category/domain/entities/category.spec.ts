@@ -60,11 +60,14 @@ describe("Category Tests", () => {
         });
     });
 
-    test('getter of name prop', () => {
+    test('getter and setter of name prop', () => {
         const category = new Category({
             name: "Movie"
         })
         expect(category.name).toBe("Movie");
+
+        category["name"] = "other name";
+        expect(category.name).toBe("other name");
     });
 
     test('getter and setter of description prop', () => {
@@ -157,5 +160,15 @@ describe("Category Tests", () => {
             expect(category.id).not.toBeNull();
             expect(category.uniqueEntityId).toBeInstanceOf(UniqueEntityId);
         })
+    });
+    test('update method', () => {
+        const category = new Category({
+            name: "Movie",
+            description: "some description"
+        })
+        category.update("other movie", "other description");
+
+        expect(category.name).toBe("other movie");
+        expect(category.description).toBe("other description");
     });
 });
