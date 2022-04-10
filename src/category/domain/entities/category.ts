@@ -58,8 +58,3 @@ export class Category extends Entity<CategoryProperties> {
     }
 }
 
-const category = new Category({ name: 'test' })
-
-const obj = category.toJSON();
-
-
