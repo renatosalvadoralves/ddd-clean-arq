@@ -1,7 +1,8 @@
+import UseCase from "../../../shared/application/use-case";
 import { CategoryRepository } from "../../domain/repository/category.repository";
 import { CategoryOutput } from "../dto/category-output.dto";
 
-export default class GetCategoryUseCase {
+export default class GetCategoryUseCase implements UseCase<Input, Output> {
     constructor(private categoryRepo: CategoryRepository.Repository) { }
 
     async execute(input: Input): Promise<Output> {
