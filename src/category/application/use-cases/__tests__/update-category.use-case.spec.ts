@@ -1,4 +1,4 @@
-import NotFoundError from "../../../../shared/domain/errors/not-found.error";
+import NotFoundError from "@shared/domain/errors/not-found.error";
 import { Category } from "../../../domain/entities/category";
 import CategoryInMemoryRepository from "../../../infra/repository/category-in-memory.repository";
 import UpdateCategoryUseCase from "../update-category.use-case"; "../update-category.use-case";

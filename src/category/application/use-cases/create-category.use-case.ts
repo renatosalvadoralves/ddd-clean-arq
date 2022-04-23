@@ -1,4 +1,4 @@
-import UseCase from "../../../shared/application/use-case";
+import UseCase from "@shared/application/use-case";
 import { Category } from "../../domain/entities/category";
 import { CategoryRepository } from "../../domain/repository/category.repository";
 import { CategoryOutput, CategoryOutputMapper } from "../dto/category-output";

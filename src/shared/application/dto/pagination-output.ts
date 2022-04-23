@@ -16,6 +16,5 @@ export class PaginationOutputMapper {
             last_page: result.last_page,
             per_page: result.per_page,
         }
-
     }
 }
