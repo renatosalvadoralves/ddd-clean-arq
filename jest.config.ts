@@ -23,7 +23,7 @@ export default {
   // collectCoverageFrom: undefined,
 
   // The directory where Jest should output its coverage files
-  // coverageDirectory: undefined,
+  coverageDirectory: '<rootDir>/../__coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
@@ -34,15 +34,30 @@ export default {
   coverageProvider: "v8",
 
   // A list of reporter names that Jest uses when writing coverage reports
-  // coverageReporters: [
-  //   "json",
+  /*  coverageReporters: [
+     "json",
+     "html",
+   ], */
   //   "text",
   //   "lcov",
   //   "clover"
   // ],
 
   // An object that configures minimum threshold enforcement for coverage results
-  // coverageThreshold: undefined,
+  coverageThreshold: {
+    global: {
+      statements: 80,
+      branches: 80,
+      functions: 80,
+      lines: 80
+    },
+    "./src/category/domain": {
+      statements: 60,
+      branches: 60,
+      functions: 60,
+      lines: 60
+    }
+  },
 
   // A path to a custom dependency extractor
   // dependencyExtractor: undefined,

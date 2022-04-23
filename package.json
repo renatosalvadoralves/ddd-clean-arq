@@ -8,7 +8,8 @@
     "tsc": "tsc",
     "clean:tsc": "rm tsconfig.tsbuildinfo",
     "test": "jest",
-    "test:watch": "jest --watchAll"
+    "test:watch": "npm run test --watchAll",
+    "test:coverage": "npm run test -- --coverage"
   },
   "author": "",
   "license": "ISC",
