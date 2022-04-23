@@ -1,7 +1,7 @@
-import { PaginationOutputDto, PaginationOutputMapper } from "@shared/application/dto/pagination-output";
-import { SearchInputDto } from "@shared/application/dto/search-input.dto";
-import UseCase from "@shared/application/use-case";
-import { CategoryRepository } from "../../domain/repository/category.repository";
+import { PaginationOutputDto, PaginationOutputMapper } from "#shared/application/dto/pagination-output";
+import { SearchInputDto } from "#shared/application/dto/search-input.dto";
+import UseCase from "#shared/application/use-case";
+import { CategoryRepository } from "#category/domain/repository/category.repository";
 import { CategoryOutput, CategoryOutputMapper } from "../dto/category-output";
 
 export default class ListCategoryUseCase implements UseCase<Input, Output> {
@@ -29,5 +29,5 @@ export default class ListCategoryUseCase implements UseCase<Input, Output> {
 }
 
 //DTO - Data Transfer Object
-export type Input = SearchInputDto;
-export type Output = PaginationOutputDto<CategoryOutput>;
+type Input = SearchInputDto;
+type Output = PaginationOutputDto<CategoryOutput>;

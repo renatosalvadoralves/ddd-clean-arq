@@ -1,5 +1,5 @@
-import UseCase from "@shared/application/use-case";
-import { CategoryRepository } from "../../domain/repository/category.repository";
+import UseCase from "#shared/application/use-case";
+import { CategoryRepository } from "#category/domain/repository/category.repository";
 
 export default class DeleteCategoryUseCase implements UseCase<Input, Output> {
     constructor(private categoryRepo: CategoryRepository.Repository) { }
@@ -11,8 +11,8 @@ export default class DeleteCategoryUseCase implements UseCase<Input, Output> {
 }
 
 //DTO - Data Transfer Object
-export type Input = {
+type Input = {
     id: string;
 }
 
-export type Output = void;
+type Output = void;

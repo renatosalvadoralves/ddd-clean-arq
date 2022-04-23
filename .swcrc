@@ -4,10 +4,13 @@
             "syntax": "typescript",
             "decorators": true
         },
-        "baseUrl": ".",
+        "baseUrl": "./src",
         "paths": {
-            "@shared/*": [
-                "./src/shared/*"
+            "#shared/*": [
+                "./shared/*"
+            ],
+            "#category/*": [
+                "./category/*"
             ]
         }
     }

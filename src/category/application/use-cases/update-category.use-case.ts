@@ -1,5 +1,5 @@
-import UseCase from "@shared/application/use-case";
-import { CategoryRepository } from "../../domain/repository/category.repository";
+import UseCase from "#shared/application/use-case";
+import { CategoryRepository } from "#category/domain/repository/category.repository";
 import { CategoryOutput, CategoryOutputMapper } from "../dto/category-output";
 
 export default class UpdateCategoryUseCase implements UseCase<Input, Output> {
@@ -23,11 +23,11 @@ export default class UpdateCategoryUseCase implements UseCase<Input, Output> {
 }
 
 //DTO - Data Transfer Object
-export type Input = {
+type Input = {
     id: string;
     name: string;
     description?: string;
     is_active?: boolean;
 }
 
-export type Output = CategoryOutput;
+type Output = CategoryOutput;

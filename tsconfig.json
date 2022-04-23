@@ -4,17 +4,31 @@
     "target": "es2017",
     "experimentalDecorators": true,
     "module": "commonjs",
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "strictNullChecks": false,
     "skipLibCheck": true,
     "paths": {
-      "@shared/*": [
-        "./src/shared/*"
+      "#shared/*": [
+        "./shared/*"
+      ],
+      "#category/*": [
+        "./category/*"
       ]
-    }
+    },
+    "outDir": "./dist",
+    /*     "plugins": [
+      {
+        "transform": "typescript-transform-paths"
+      },
+      {
+        "transform": "typescript-transform-paths",
+        "afterDeclarations": true
+      }
+    ], */
+    "declaration": true
   },
   "include": [
     "src/"

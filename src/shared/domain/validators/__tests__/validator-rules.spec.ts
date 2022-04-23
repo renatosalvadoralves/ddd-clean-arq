@@ -1,4 +1,4 @@
-import { ValidationError } from "../../errors/validation-error";
+import { ValidationError } from "#shared/domain";
 import ValidatorRules from "../validator-rules";
 
 type Values = {
@@ -213,4 +213,4 @@ describe("ValidatorRules Unit Tests", () => {
         ValidatorRules.values(true, "field").required().boolean();
         ValidatorRules.values(false, "field").required().boolean();
     });
-});
+}); 
