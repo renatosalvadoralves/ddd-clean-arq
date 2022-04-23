@@ -51,12 +51,12 @@ export default {
       functions: 80,
       lines: 80
     },
-    "./src/category/domain": {
-      statements: 60,
-      branches: 60,
-      functions: 60,
-      lines: 60
-    }
+    /*  "./src/category/domain": {
+       statements: 60,
+       branches: 60,
+       functions: 60,
+       lines: 60
+     } */
   },
 
   // A path to a custom dependency extractor
