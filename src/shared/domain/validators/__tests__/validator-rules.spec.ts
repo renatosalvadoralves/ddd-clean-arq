@@ -21,8 +21,8 @@ const applyRules = ({
     params = []
 }: Omit<ExceptedRule, 'error'>) => {
     const validator = ValidatorRules.values(value, property);
-    const method = validator[rule];
-    method.apply(validator, params)
+    const method: any = validator[rule];
+    method.apply(validator, params);
 }
 
 function assertIsInvalid({ error, ...rest }: ExceptedRule) {

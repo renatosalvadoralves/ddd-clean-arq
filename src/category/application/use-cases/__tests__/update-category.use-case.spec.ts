@@ -35,8 +35,22 @@ describe("UpdateCategoryUseCase Unit Tests", () => {
             created_at: entity.created_at
         })
         expect(spyUpdate).toHaveBeenCalledTimes(1);
-
-        const arrange = [
+        type Arrange = {
+            input: {
+                id: string;
+                name: string;
+                description?: null | string;
+                is_active?: boolean;
+            },
+            expected: {
+                id: string;
+                name: string;
+                description: null | string;
+                is_active: boolean;
+                created_at: Date;
+            }
+        }
+        const arrange: Arrange[] = [
             {
                 input: {
                     id: entity.id,
