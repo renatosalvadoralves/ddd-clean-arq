@@ -1,44 +1,34 @@
 {
-  "name": "app",
-  "version": "1.0.0",
+  "name": "micro-videos-typescript",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
-  "imports": {
-    "#shared/*": "./dist/shared/*.js",
-    "#category/*": "./dist/category/*.js"
-  },
-  "scripts": {
-    "ts-node": "ts-node",
-    "tsc": "tsc",
-    "tsc:check": "npm run tsc -- --noEmit",
-    "tsc:build": "npm run tsc -- -b",
-    "clean:tsc": "rm tsconfig.tsbuildinfo",
-    "test": "jest",
-    "test:watch": "npm run test --watchAll",
-    "test:coverage": "npm run test -- --coverage",
-    "cti": "cti",
-    "cti:@core": "sh ./cti.sh"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@swc/core": "^1.2.165",
-    "@swc/jest": "^0.2.20",
-    "@types/jest": "^27.4.1",
-    "@types/lodash": "^4.14.181",
-    "@types/node": "^14.14.31",
-    "@types/uuid": "^8.3.4",
-    "create-ts-index": "^1.14.0",
-    "jest": "^27.5.1",
-    "lodash": "^4.17.21",
-    "regenerator-runtime": "^0.13.9",
-    "ts-node": "^10.7.0",
-    "ttypescript": "^1.5.13",
-    "typescript": "^4.6.3",
-    "typescript-transform-paths": "^3.3.1"
-  },
   "dependencies": {
     "class-validator": "^0.13.2",
+    "create-ts-index": "^1.14.0",
+    "regenerator-runtime": "^0.13.9",
+    "ttypescript": "^1.5.13",
+    "typescript-transform-paths": "^3.3.1",
     "uuid": "^8.3.2"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npm run test --workspaces",
+    "start:dev": "ts-node -r tsconfig-paths/register npm run start:dev -w nestjs"
+  },
+  "workspaces": [
+    "./src/@core",
+    "./src/nestjs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renatosalvadoralves/ddd-clean-arq.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/renatosalvadoralves/ddd-clean-arq/issues"
+  },
+  "homepage": "https://github.com/renatosalvadoralves/ddd-clean-arq#readme"
 }
