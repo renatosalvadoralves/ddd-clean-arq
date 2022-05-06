@@ -14,7 +14,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "npm run test --workspaces",
-    "start:dev": "ts-node -r tsconfig-paths/register npm run start:dev -w nestjs"
+    "start:dev": "npm run start:dev -w nestjs"
   },
   "workspaces": [
     "./src/@core",
