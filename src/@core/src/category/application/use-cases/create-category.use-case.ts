@@ -1,7 +1,6 @@
 import {default as DefaultUseCase} from "#shared/application/use-case";
-import { CategoryRepository } from "#category/domain/repository/category.repository";
-import { Category } from "#category/domain/entities/category";
-import { CategoryOutput, CategoryOutputMapper } from "#category/application/dto/category-output";
+import { CategoryRepository, Category } from "#category/domain";
+import { CategoryOutput, CategoryOutputMapper } from "#category/application";
 
 export namespace CreateCategoryUseCase {
     export class UseCase implements DefaultUseCase<Input, Output> {
