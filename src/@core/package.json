@@ -4,6 +4,10 @@
   "description": "",
   "main": "index.js",
   "imports": {
+    "#shared/domain": "./dist/shared/domain/index.js",
+    "#category/domain": "./dist/category/domain/index.js",
+    "#shared/application": "./dist/shared/application/index.js",
+    "#category/application": "./dist/category/application/index.js",
     "#shared/*": "./dist/shared/*.js",
     "#category/*": "./dist/category/*.js"
   },
@@ -12,27 +16,27 @@
     "./category/application": "./dist/category/application/index.js",
     "./category/infra": "./dist/category/infra/index.js",
     "./shared/application": "./dist/shared/application/index.js",
-    "./shared/domain": "./dist/category/domain/index.js"
+    "./shared/domain": "./dist/shared/domain/index.js"
   },
-  "typesVersion": {
+  "typesVersions": {
     ">=4.0": {
       "category/domain": [
-        "./dist/category/domain/index.js"
+        "./dist/category/domain/index.d.ts"
       ],
       "category/application": [
-        "./dist/category/application/index.js"
+        "./dist/category/application/index.d.ts"
       ],
       "category/infra": [
-        "./dist/category/infra/index.js"
+        "./dist/category/infra/index.d.ts"
       ],
       "shared/application": [
-        "./dist/shared/application/index.js"
+        "./dist/shared/application/index.d.ts"
       ],
       "shared/domain": [
-        "./dist/shared/domain/index.js"
+        "./dist/shared/domain/index.d.ts"
       ],
       "shared/infra": [
-        "./dist/shared/infra/index.js"
+        "./dist/shared/infra/index.d.ts"
       ]
     }
   },

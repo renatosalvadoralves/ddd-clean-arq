@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { CreateCategoryUseCase } from '@mycore/micro-videos/src/category/application';
+import { CreateCategoryUseCase } from 'mycore/src/category/application';
 
 @Controller()
 export class AppController {
