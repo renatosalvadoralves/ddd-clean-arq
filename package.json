@@ -13,8 +13,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "prestart:dev": "npm run build -w @mycore/micro-videos",
-    "start:dev": "npm run build:w -w @mycore/micro-videos & npm run start:dev -w nestjs",
+    "prestart:dev": "npm run build -w mycore",
+    "start:dev": "npm run build:w -w mycore & npm run start:dev -w nestjs",
     "test": "jest"
   },
   "workspaces": [
