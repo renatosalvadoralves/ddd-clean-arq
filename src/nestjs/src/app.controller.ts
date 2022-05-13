@@ -1,6 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { CreateCategoryUseCase } from 'mycore/category/application';
 
 @Controller()
 export class AppController {
@@ -8,7 +7,6 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    console.log(CreateCategoryUseCase.UseCase);
     return this.appService.getHello();
   }
 }

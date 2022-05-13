@@ -20,5 +20,7 @@ export default {
     testEnvironment: "node",
      moduleNameMapper: {
         'mycore/(.*)': '<rootDir>/../../../node_modules/mycore/dist/$1',
+        '#shared/(.*)$': '<rootDir>/../../../node_modules/mycore/dist/shared/$1',
+        '#category/(.*)$': '<rootDir>/../../../node_modules/mycore/dist/category/$1',
     } 
 }
