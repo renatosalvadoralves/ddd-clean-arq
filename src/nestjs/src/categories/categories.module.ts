@@ -13,7 +13,7 @@ import { CategoryRepository } from 'mycore/category/domain';
   providers: [
     CategoriesService,
     {
-      provide: 'CategoryRepository',
+      provide: 'CategoryInMemoryRepository',
       useClass: CategoryInMemoryRepository,
     },
     {
@@ -21,14 +21,14 @@ import { CategoryRepository } from 'mycore/category/domain';
       useFactory: (categoryRepo: CategoryRepository.Repository) => {
         return new CreateCategoryUseCase.UseCase(categoryRepo);
       },
-      inject: ['CategoryRepository'],
+      inject: ['CategoryInMemoryRepository'],
     },
     {
       provide: ListCategoryUseCase.UseCase,
       useFactory: (categoryRepo: CategoryRepository.Repository) => {
         return new ListCategoryUseCase.UseCase(categoryRepo);
       },
-      inject: ['CategoryRepository'],
+      inject: ['CategoryInMemoryRepository'],
     },
   ],
 })
