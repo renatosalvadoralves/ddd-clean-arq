@@ -1,6 +1,6 @@
 import { Category, CategoryProperties } from "../category";
 import { omit } from 'lodash';
-import { UniqueEntityId } from "#shared/domain/value-objects";
+import { UniqueEntityId } from "#shared/domain";
 
 describe("Category Tests", () => {
     beforeEach(() => {

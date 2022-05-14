@@ -1,7 +1,7 @@
-import NotFoundError from "#shared/domain/errors/not-found.error";
+import { NotFoundError } from "#shared/domain";
 import { Category } from "#category/domain";
-import CategoryInMemoryRepository from "#category/infra/repository/category-in-memory.repository";
-import {GetCategoryUseCase} from "../get-category.use-case";
+import { CategoryInMemoryRepository } from "#category/infra";
+import { GetCategoryUseCase } from "#category/application";
 
 describe("GetCategoryUseCase Unit Tests", () => {
     let useCase: GetCategoryUseCase.UseCase;
