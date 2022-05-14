@@ -6,31 +6,25 @@ import {
   Patch,
   Param,
   Delete,
+  Inject,
 } from '@nestjs/common';
-import {
-  ListCategoryUseCase,
-  CreateCategoryUseCase,
-} from 'mycore/category/application';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Controller('categories')
 export class CategoriesController {
-  constructor(
-    private readonly categoriesService: CategoriesService,
-    private createUseCase: CreateCategoryUseCase.UseCase,
-    private listUseCase: ListCategoryUseCase.UseCase,
-  ) {}
+  @Inject(CategoriesService)
+  private categoriesService: CategoriesService;
 
   @Post()
   create(@Body() createCategoryDto: CreateCategoryDto) {
-    return this.createUseCase.execute({ name: 'test' });
+    return this.categoriesService.create({ name: 'dsds' });
   }
 
   @Get()
   findAll() {
-    return this.listUseCase.execute({});
+    return this.categoriesService.search({});
   }
 
   @Get(':id')

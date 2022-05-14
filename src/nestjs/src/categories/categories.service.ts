@@ -1,15 +1,24 @@
-import { Injectable } from '@nestjs/common';
-import { CreateCategoryDto } from './dto/create-category.dto';
+import { Inject, Injectable } from '@nestjs/common';
+import {
+  CreateCategoryUseCase,
+  ListCategoryUseCase,
+} from 'mycore/category/application';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Injectable()
 export class CategoriesService {
-  create(createCategoryDto: CreateCategoryDto) {
-    return 'This action adds a new category';
+  @Inject(CreateCategoryUseCase.UseCase)
+  private createUseCase: CreateCategoryUseCase.UseCase;
+
+  @Inject(ListCategoryUseCase.UseCase)
+  private listUseCase: ListCategoryUseCase.UseCase;
+
+  create(createCategoryDto: CreateCategoryUseCase.Input) {
+    return this.createUseCase.execute(createCategoryDto);
   }
 
-  findAll() {
-    return `This action returns all categories`;
+  search(input: ListCategoryUseCase.Input) {
+    return this.listUseCase.execute(input);
   }
 
   findOne(id: number) {
