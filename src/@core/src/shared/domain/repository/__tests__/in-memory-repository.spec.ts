@@ -57,7 +57,6 @@ describe('InMemoryRepository Unit Tests', () => {
         const entity = new StubEntity({ name: "test", price: 5 });
         await repository.insert(entity);
         const entityUpdated = new StubEntity({ name: "test2", price: 5 }, entity.uniqueEntityId);
-
         await repository.update(entityUpdated);
         expect(entityUpdated.toJSON()).toStrictEqual(repository.items[0].toJSON());
     });

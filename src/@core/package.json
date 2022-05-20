@@ -5,9 +5,9 @@
   "main": "index.js",
   "imports": {
     "#shared/domain": "./dist/shared/domain/index.js",
+    "#shared/application": "./dist/shared/application/index.js",
     "#category/domain": "./dist/category/domain/index.js",
     "#category/infra": "./dist/category/infra/index.js",
-    "#shared/application": "./dist/shared/application/index.js",
     "#category/application": "./dist/category/application/index.js",
     "#shared/*": "./dist/shared/*.js",
     "#category/*": "./dist/category/*.js"
