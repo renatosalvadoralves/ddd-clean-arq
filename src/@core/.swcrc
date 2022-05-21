@@ -4,14 +4,6 @@
             "syntax": "typescript",
             "decorators": true
         },
-        "baseUrl": "./src",
-        "paths": {
-            "#shared/*": [
-                "./shared/*"
-            ],
-            "#category/*": [
-                "./category/*"
-            ]
-        }
+        "baseUrl": "./src"
     }
 }
