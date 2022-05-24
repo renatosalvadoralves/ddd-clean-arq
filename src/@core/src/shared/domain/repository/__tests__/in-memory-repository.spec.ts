@@ -22,9 +22,13 @@ describe('InMemoryRepository Unit Tests', () => {
     });
 
     it('should throws error when entity not found', async () => {
-        expect(repository.findById("fake uid")).rejects.toThrow(new NotFoundError("Entity not found using ID: fake uid"));
+        await expect(repository.findById("fake uid")).rejects.toThrow(
+            new NotFoundError("Entity not found using ID: fake uid")
+        );
 
-        expect(repository.findById("829137b2-bce5-4651-aa75-20da6548b8f3")).rejects.toThrow(new NotFoundError("Entity not found using ID: 829137b2-bce5-4651-aa75-20da6548b8f3"));
+        await expect(repository.findById("829137b2-bce5-4651-aa75-20da6548b8f3")).rejects.toThrow(
+            new NotFoundError("Entity not found using ID: 829137b2-bce5-4651-aa75-20da6548b8f3")
+        );
     });
 
     it('should should find entity by id', async () => {
@@ -50,7 +54,9 @@ describe('InMemoryRepository Unit Tests', () => {
 
     it('should throws error when update not exist', async () => {
         const entity = new StubEntity({ name: "test", price: 5 });
-        expect(repository.update(entity)).rejects.toThrow(new NotFoundError(`Entity not found using ID: ${entity.id}`));
+        await expect(repository.update(entity)).rejects.toThrow(
+            new NotFoundError(`Entity not found using ID: ${entity.id}`)
+        );
     });
 
     it('should updates as entity', async () => {
@@ -62,9 +68,13 @@ describe('InMemoryRepository Unit Tests', () => {
     });
 
     it('should throws error in delete when entity not found', async () => {
-        expect(repository.delete("fake uid")).rejects.toThrow(new NotFoundError("Entity not found using ID: fake uid"));
+        await expect(repository.delete("fake uid")).rejects.toThrow(
+            new NotFoundError("Entity not found using ID: fake uid")
+        );
 
-        expect(repository.delete("829137b2-bce5-4651-aa75-20da6548b8f3")).rejects.toThrow(new NotFoundError("Entity not found using ID: 829137b2-bce5-4651-aa75-20da6548b8f3"));
+        await expect(repository.delete("829137b2-bce5-4651-aa75-20da6548b8f3")).rejects.toThrow(
+            new NotFoundError("Entity not found using ID: 829137b2-bce5-4651-aa75-20da6548b8f3")
+        );
     });
 
     it('should deletes an entity', async () => {
