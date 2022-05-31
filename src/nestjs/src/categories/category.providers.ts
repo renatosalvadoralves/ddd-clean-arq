@@ -13,7 +13,7 @@ export namespace CATEGORY_PROVIDERS {
         export const CATEGORY_IN_MEMORY_REPOSITORY = {
             provide: 'CategoryInMemoryRepository',
             useClass: CategoryInMemoryRepository,
-        }
+        };
     }
 
     export namespace USE_CASES {

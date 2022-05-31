@@ -1,4 +1,4 @@
-import { Entity, UniqueEntityId } from "#shared/domain"
+import { Entity, UniqueEntityId } from '#shared/domain';
 
 export interface RepositoryInterface<T extends Entity> {
     insert(entity: T): Promise<void>;
@@ -8,18 +8,18 @@ export interface RepositoryInterface<T extends Entity> {
     delete(id: string | UniqueEntityId): Promise<void>;
 }
 
-export type SortDirection = "asc" | "desc";
+export type SortDirection = 'asc' | 'desc';
 export type SearchProps<Filter = string> = {
     page?: number;
     per_page?: number;
     sort?: string | null;
     sort_dir?: SortDirection | null;
     filter?: Filter | null;
-}
+};
 
 export class SearchParams<Filter = string> {
     protected _page: number;
-    protected _per_page: number = 15;
+    protected _per_page = 15;
     protected _sort: string | null;
     protected _sort_dir: SortDirection | null;
     protected _filter: Filter | null;
@@ -38,11 +38,7 @@ export class SearchParams<Filter = string> {
     private set page(value: number) {
         let _page = +value;
 
-        if (
-            Number.isNaN(_page) ||
-            _page <= 0 ||
-            parseInt(_page as any) !== _page
-        ) {
+        if (Number.isNaN(_page) || _page <= 0 || parseInt(_page as any) !== _page) {
             _page = 1;
         }
 
@@ -53,13 +49,9 @@ export class SearchParams<Filter = string> {
         return this._per_page;
     }
     private set per_page(value: number) {
-        let _per_page = value === true as any ? this._per_page : +value;
+        let _per_page = value === (true as any) ? this._per_page : +value;
 
-        if (
-            Number.isNaN(_per_page) ||
-            _per_page <= 0 ||
-            parseInt(_per_page as any) !== _per_page
-        ) {
+        if (Number.isNaN(_per_page) || _per_page <= 0 || parseInt(_per_page as any) !== _per_page) {
             _per_page = this._per_page;
         }
 
@@ -70,9 +62,7 @@ export class SearchParams<Filter = string> {
         return this._sort;
     }
     private set sort(value: string | null) {
-        this._sort = (value === null || value === undefined || value === "") ?
-            null :
-            `${value}`;
+        this._sort = value === null || value === undefined || value === '' ? null : `${value}`;
     }
 
     get sort_dir(): SortDirection | null {
@@ -84,17 +74,14 @@ export class SearchParams<Filter = string> {
             return;
         }
         const dir = `${value}`.toLowerCase();
-        this._sort_dir = dir !== "asc" && dir !== "desc" ? "asc" : dir;
+        this._sort_dir = dir !== 'asc' && dir !== 'desc' ? 'asc' : dir;
     }
 
     get filter(): Filter | null {
         return this._filter;
     }
     private set filter(value: Filter | null) {
-        this._filter =
-            value === null || value === undefined || (value as unknown) === "" ?
-                null :
-                `${value}` as any;
+        this._filter = value === null || value === undefined || (value as unknown) === '' ? null : (`${value}` as any);
     }
 }
 
@@ -106,7 +93,7 @@ type SearchResultProps<E extends Entity, Filter = string> = {
     sort: string | null;
     sort_dir: string | null;
     filter: Filter;
-}
+};
 
 export class SearchResult<E extends Entity = Entity, Filter = string> {
     readonly items: E[];
@@ -138,16 +125,16 @@ export class SearchResult<E extends Entity = Entity, Filter = string> {
             last_page: this.last_page,
             sort: this.sort,
             sort_dir: this.sort_dir,
-            filter: this.filter
+            filter: this.filter,
         };
     }
 }
 
-export interface SearchableRepositoryInterface
-    <E extends Entity,
+export interface SearchableRepositoryInterface<
+    E extends Entity,
     Filter = string,
     SearchInput = SearchParams<Filter>,
-    SearchOutput = SearchResult<E, Filter>>
-    extends RepositoryInterface<E> {
-    search(props: SearchInput): Promise<SearchOutput>
+    SearchOutput = SearchResult<E, Filter>,
+> extends RepositoryInterface<E> {
+    search(props: SearchInput): Promise<SearchOutput>;
 }

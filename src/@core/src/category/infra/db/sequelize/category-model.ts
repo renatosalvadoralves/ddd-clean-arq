@@ -1,4 +1,4 @@
-import { Column, DataType, PrimaryKey, Table, Model } from "sequelize-typescript";
+import { Column, DataType, PrimaryKey, Table, Model } from 'sequelize-typescript';
 
 type CategoryModelProperties = {
     id: string;
@@ -6,7 +6,7 @@ type CategoryModelProperties = {
     description: string | null;
     is_active: boolean;
     created_at: Date;
-}
+};
 
 @Table({ tableName: 'categories', timestamps: false })
 export class CategoryModel extends Model<CategoryModelProperties> {
