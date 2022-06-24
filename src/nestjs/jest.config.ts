@@ -1,26 +1,20 @@
 export default {
     displayName: {
-        name: "nestjs",
-        color: 'magentaBright'
+        name: 'nestjs',
+        color: 'magentaBright',
     },
-    moduleFileExtensions: [
-        "js",
-        "json",
-        "ts"
-    ],
-    rootDir: "src",
-    testRegex: ".*\\.spec\\.ts$",
+    moduleFileExtensions: ['js', 'json', 'ts'],
+    rootDir: 'src',
+    testRegex: '.*\\.spec\\.ts$',
     transform: {
-        "^.+\\.(t|j)s$": "@swc/jest"
+        '^.+\\.(t|j)s$': '@swc/jest',
     },
-    collectCoverageFrom: [
-        "**/*.(t|j)s"
-    ],
-    coverageDirectory: "../coverage",
-    testEnvironment: "node",
-     moduleNameMapper: {
+    collectCoverageFrom: ['**/*.(t|j)s'],
+    coverageDirectory: '../coverage',
+    testEnvironment: 'node',
+    moduleNameMapper: {
         'mycore/(.*)': '<rootDir>/../../../node_modules/mycore/dist/$1',
         '#shared/(.*)$': '<rootDir>/../../../node_modules/mycore/dist/shared/$1',
         '#category/(.*)$': '<rootDir>/../../../node_modules/mycore/dist/category/$1',
-    } 
-}
+    },
+};

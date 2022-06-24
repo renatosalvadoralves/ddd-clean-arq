@@ -1,11 +1,11 @@
-import { PaginationOutputDto, PaginationOutputMapper, SearchInputDto } from "#shared/application";
-import { default as DefaultUseCase } from "#shared/application/use-case";
-import { CategoryRepository } from "#category/domain";
-import { CategoryOutput, CategoryOutputMapper } from "#category/application";
+import { PaginationOutputDto, PaginationOutputMapper, SearchInputDto } from '#shared/application';
+import { default as DefaultUseCase } from '#shared/application/use-case';
+import { CategoryRepository } from '#category/domain';
+import { CategoryOutput, CategoryOutputMapper } from '#category/application';
 
 export namespace ListCategoryUseCase {
     export class UseCase implements DefaultUseCase<Input, Output> {
-        constructor(private categoryRepo: CategoryRepository.Repository) { }
+        constructor(private categoryRepo: CategoryRepository.Repository) {}
 
         async execute(input: Input): Promise<Output> {
             const params = new CategoryRepository.SearchParams(input);
@@ -15,16 +15,13 @@ export namespace ListCategoryUseCase {
         }
 
         private toOutput(searchResult: CategoryRepository.SearchResult): Output {
-            const items = searchResult.items.map(item =>
-                CategoryOutputMapper.toOutput(item)
-            );
+            const items = searchResult.items.map((item) => CategoryOutputMapper.toOutput(item));
 
             const pagination = PaginationOutputMapper.toOutput(searchResult);
             return {
                 items,
-                ...pagination
-            }
-
+                ...pagination,
+            };
         }
     }
 

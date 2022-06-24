@@ -1,4 +1,4 @@
-import {UniqueEntityId} from "#shared/domain";
+import { UniqueEntityId } from '#shared/domain';
 
 export abstract class Entity<T = any> {
     public readonly uniqueEntityId: UniqueEntityId;
@@ -14,8 +14,8 @@ export abstract class Entity<T = any> {
     toJSON() {
         return {
             id: this.id,
-            ...this.props
-        } as Required<{ id: string } & T>
+            ...this.props,
+        } as Required<{ id: string } & T>;
     }
 }
 

@@ -1,4 +1,4 @@
-import { SortDirection } from "#shared/domain";
+import { SortDirection } from '#shared/domain';
 
 export type Filter = string;
 
@@ -8,4 +8,4 @@ export type SearchInputDto<Filter = string> = {
     sort?: string | null;
     sort_dir?: SortDirection | null;
     filter?: Filter | null;
-}
+};

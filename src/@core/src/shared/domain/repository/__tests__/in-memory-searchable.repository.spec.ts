@@ -1,11 +1,11 @@
-import { Entity, InMemorySearchableRepository, SearchParams, SearchResult } from "#shared/domain"
+import { Entity, InMemorySearchableRepository, SearchParams, SearchResult } from '#shared/domain';
 
 type StubEntityProps = {
     name: string;
     price: number;
-}
+};
 
-class StubEntity extends Entity<StubEntityProps> { }
+class StubEntity extends Entity<StubEntityProps> {}
 
 class StubInMemorySearchableRepository extends InMemorySearchableRepository<StubEntity> {
     sortableFields: string[] = ['name'];
@@ -15,23 +15,20 @@ class StubInMemorySearchableRepository extends InMemorySearchableRepository<Stub
             return items;
         }
 
-        return items.filter(item => {
+        return items.filter((item) => {
             return (
-                item.props.name
-                    .toLowerCase()
-                    .includes(filter.toLowerCase()) ||
-                item.props.price.toString() === filter
-            )
+                item.props.name.toLowerCase().includes(filter.toLowerCase()) || item.props.price.toString() === filter
+            );
         });
     }
 }
 
-describe("InMemorySearchableRepository Unit Tests", () => {
+describe('InMemorySearchableRepository Unit Tests', () => {
     let repository: StubInMemorySearchableRepository;
     beforeEach(() => (repository = new StubInMemorySearchableRepository()));
 
-    describe("applyFilter method", () => {
-        it("should no filter items when filter param is null", async () => {
+    describe('applyFilter method', () => {
+        it('should no filter items when filter param is null', async () => {
             const items = [new StubEntity({ name: 'name value', price: 5 })];
             const spyFilterMethod = jest.spyOn(items, 'filter' as any);
             const itemsFiltered = await repository['applyFilter'](items, null);
@@ -39,7 +36,7 @@ describe("InMemorySearchableRepository Unit Tests", () => {
             expect(spyFilterMethod).not.toHaveBeenCalled();
         });
 
-        it("should filter using a filter param", async () => {
+        it('should filter using a filter param', async () => {
             const items = [
                 new StubEntity({ name: 'TEST', price: 5 }),
                 new StubEntity({ name: 'Test', price: 5 }),
@@ -57,37 +54,34 @@ describe("InMemorySearchableRepository Unit Tests", () => {
             itemsFiltered = await repository['applyFilter'](items, 'no-filter');
             expect(itemsFiltered).toHaveLength(0);
             expect(spyFilterMethod).toHaveBeenCalledTimes(3);
-        })
+        });
     });
-    describe("applySort method", () => {
-        it("should no sort items ", async () => {
-            const items = [
-                new StubEntity({ name: 'b', price: 5 }),
-                new StubEntity({ name: 'a', price: 5 }),
-            ];
+    describe('applySort method', () => {
+        it('should no sort items ', async () => {
+            const items = [new StubEntity({ name: 'b', price: 5 }), new StubEntity({ name: 'a', price: 5 })];
             let itemsSorted = await repository['applySort'](items, null, null);
             expect(itemsSorted).toStrictEqual(items);
 
-            itemsSorted = await repository['applySort'](items, "price", "asc");
+            itemsSorted = await repository['applySort'](items, 'price', 'asc');
             expect(itemsSorted).toStrictEqual(items);
-        })
+        });
 
-        it("should sort items", async () => {
+        it('should sort items', async () => {
             const items = [
                 new StubEntity({ name: 'b', price: 5 }),
                 new StubEntity({ name: 'a', price: 5 }),
                 new StubEntity({ name: 'c', price: 5 }),
             ];
 
-            let itemsSorted = await repository['applySort'](items, "name", "asc");
+            let itemsSorted = await repository['applySort'](items, 'name', 'asc');
             expect(itemsSorted).toStrictEqual([items[1], items[0], items[2]]);
 
-            itemsSorted = await repository['applySort'](items, "name", "desc");
+            itemsSorted = await repository['applySort'](items, 'name', 'desc');
             expect(itemsSorted).toStrictEqual([items[2], items[0], items[1]]);
-        })
+        });
     });
-    describe("applyPaginate method", () => {
-        it("should paginate items", async () => {
+    describe('applyPaginate method', () => {
+        it('should paginate items', async () => {
             const items = [
                 new StubEntity({ name: 'a', price: 5 }),
                 new StubEntity({ name: 'b', price: 5 }),
@@ -106,13 +100,12 @@ describe("InMemorySearchableRepository Unit Tests", () => {
 
             itemsPaginated = await repository['applyPaginate'](items, 4, 2);
             expect(itemsPaginated).toStrictEqual([]);
-        })
+        });
     });
 
-    describe("search method", () => {
-
-        it("should apply only paginate when other params are null", async () => {
-            const entity = new StubEntity({ name: "a", price: 5 })
+    describe('search method', () => {
+        it('should apply only paginate when other params are null', async () => {
+            const entity = new StubEntity({ name: 'a', price: 5 });
             const items = Array(16).fill(entity);
             repository.items = items;
             const result = await repository.search(new SearchParams());
@@ -125,12 +118,12 @@ describe("InMemorySearchableRepository Unit Tests", () => {
                     per_page: 15,
                     sort: null,
                     sort_dir: null,
-                    filter: null
-                })
+                    filter: null,
+                }),
             );
         });
 
-        it("should apply only paginate and filter", async () => {
+        it('should apply only paginate and filter', async () => {
             const items = [
                 new StubEntity({ name: 'test', price: 5 }),
                 new StubEntity({ name: 'a', price: 5 }),
@@ -138,9 +131,13 @@ describe("InMemorySearchableRepository Unit Tests", () => {
                 new StubEntity({ name: 'TeSt', price: 5 }),
             ];
             repository.items = items;
-            let result = await repository.search(new SearchParams({
-                page: 1, per_page: 2, filter: 'TEST'
-            }));
+            let result = await repository.search(
+                new SearchParams({
+                    page: 1,
+                    per_page: 2,
+                    filter: 'TEST',
+                }),
+            );
 
             expect(result).toStrictEqual(
                 new SearchResult({
@@ -150,13 +147,17 @@ describe("InMemorySearchableRepository Unit Tests", () => {
                     per_page: 2,
                     sort: null,
                     sort_dir: null,
-                    filter: "TEST"
-                })
+                    filter: 'TEST',
+                }),
             );
 
-            result = await repository.search(new SearchParams({
-                page: 2, per_page: 2, filter: 'TEST'
-            }));
+            result = await repository.search(
+                new SearchParams({
+                    page: 2,
+                    per_page: 2,
+                    filter: 'TEST',
+                }),
+            );
 
             expect(result).toStrictEqual(
                 new SearchResult({
@@ -166,12 +167,12 @@ describe("InMemorySearchableRepository Unit Tests", () => {
                     per_page: 2,
                     sort: null,
                     sort_dir: null,
-                    filter: "TEST"
-                })
+                    filter: 'TEST',
+                }),
             );
-        })
+        });
 
-        it("should apply only paginate and sort", async () => {
+        it('should apply only paginate and sort', async () => {
             const items = [
                 new StubEntity({ name: 'b', price: 5 }),
                 new StubEntity({ name: 'a', price: 5 }),
@@ -190,10 +191,10 @@ describe("InMemorySearchableRepository Unit Tests", () => {
                         total: 5,
                         current_page: 1,
                         per_page: 2,
-                        sort: "name",
-                        sort_dir: "asc",
-                        filter: null
-                    })
+                        sort: 'name',
+                        sort_dir: 'asc',
+                        filter: null,
+                    }),
                 },
                 {
                     params: new SearchParams({ page: 2, per_page: 2, sort: 'name' }),
@@ -202,46 +203,44 @@ describe("InMemorySearchableRepository Unit Tests", () => {
                         total: 5,
                         current_page: 2,
                         per_page: 2,
-                        sort: "name",
-                        sort_dir: "asc",
-                        filter: null
-                    })
+                        sort: 'name',
+                        sort_dir: 'asc',
+                        filter: null,
+                    }),
                 },
                 {
-                    params: new SearchParams({ page: 1, per_page: 2, sort: 'name', sort_dir: "desc" }),
+                    params: new SearchParams({ page: 1, per_page: 2, sort: 'name', sort_dir: 'desc' }),
                     result: new SearchResult({
                         items: [items[3], items[2]],
                         total: 5,
                         current_page: 1,
                         per_page: 2,
-                        sort: "name",
-                        sort_dir: "desc",
-                        filter: null
-                    })
+                        sort: 'name',
+                        sort_dir: 'desc',
+                        filter: null,
+                    }),
                 },
                 {
-                    params: new SearchParams({ page: 2, per_page: 2, sort: 'name', sort_dir: "desc" }),
+                    params: new SearchParams({ page: 2, per_page: 2, sort: 'name', sort_dir: 'desc' }),
                     result: new SearchResult({
                         items: [items[4], items[0]],
                         total: 5,
                         current_page: 2,
                         per_page: 2,
-                        sort: "name",
-                        sort_dir: "desc",
-                        filter: null
-                    })
+                        sort: 'name',
+                        sort_dir: 'desc',
+                        filter: null,
+                    }),
                 },
             ];
 
             for (const i of arrange) {
-                let result = await repository.search(new SearchParams(i.params));
-                expect(result).toStrictEqual(
-                    new SearchResult(i.result)
-                );
+                const result = await repository.search(new SearchParams(i.params));
+                expect(result).toStrictEqual(new SearchResult(i.result));
             }
         });
 
-        it("should search using filter, sort and paginate", async () => {
+        it('should search using filter, sort and paginate', async () => {
             const items = [
                 new StubEntity({ name: 'test', price: 5 }),
                 new StubEntity({ name: 'a', price: 5 }),
@@ -260,32 +259,29 @@ describe("InMemorySearchableRepository Unit Tests", () => {
                         total: 3,
                         current_page: 1,
                         per_page: 2,
-                        sort: "name",
-                        sort_dir: "asc",
-                        filter: "TEST"
-                    })
+                        sort: 'name',
+                        sort_dir: 'asc',
+                        filter: 'TEST',
+                    }),
                 },
                 {
-                    params: new SearchParams({ page: 2, per_page: 2, sort: 'name', filter: "TEST" }),
+                    params: new SearchParams({ page: 2, per_page: 2, sort: 'name', filter: 'TEST' }),
                     result: new SearchResult({
                         items: [items[0]],
                         total: 3,
                         current_page: 2,
                         per_page: 2,
-                        sort: "name",
-                        sort_dir: "asc",
-                        filter: "TEST"
-                    })
+                        sort: 'name',
+                        sort_dir: 'asc',
+                        filter: 'TEST',
+                    }),
                 },
             ];
 
             for (const i of arrange) {
-                let result = await repository.search(new SearchParams(i.params));
-                expect(result).toStrictEqual(
-                    new SearchResult(i.result)
-                );
+                const result = await repository.search(new SearchParams(i.params));
+                expect(result).toStrictEqual(new SearchResult(i.result));
             }
-
         });
     });
 });

@@ -1,17 +1,17 @@
-import { UniqueEntityId, Entity, EntityValidationError } from '#shared/domain'
-import { CategoryValidatorFactory } from "#category/domain";
+import { UniqueEntityId, Entity, EntityValidationError } from '#shared/domain';
+import { CategoryValidatorFactory } from '#category/domain';
 
 export type CategoryProperties = {
-    name: string,
-    is_active?: boolean,
-    description?: string,
-    created_at?: Date
-}
+    name: string;
+    is_active?: boolean;
+    description?: string;
+    created_at?: Date;
+};
 
 export class Category extends Entity<CategoryProperties> {
     constructor(public readonly props: CategoryProperties, id?: UniqueEntityId) {
         Category.validate(props);
-        super(props, id)
+        super(props, id);
         this.description = this.props.description;
         this.props.is_active = this.props.is_active ?? true;
         this.props.created_at = this.props.created_at ?? new Date();
@@ -34,7 +34,7 @@ export class Category extends Entity<CategoryProperties> {
         const isValid = validator.validate(props);
 
         if (!isValid) {
-            throw new EntityValidationError(validator.errors)
+            throw new EntityValidationError(validator.errors);
         }
     }
 
@@ -74,4 +74,3 @@ export class Category extends Entity<CategoryProperties> {
         return this.props.created_at;
     }
 }
-

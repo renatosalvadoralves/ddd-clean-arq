@@ -4,8 +4,13 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
     "class-validator": "^0.13.2",
     "create-ts-index": "^1.14.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.2",
     "regenerator-runtime": "^0.13.9",
     "ttypescript": "^1.5.13",
     "typescript-transform-paths": "^3.3.1",
@@ -17,7 +22,8 @@
   "scripts": {
     "prestart:dev": "npm run build -w mycore",
     "start:dev": "npm run build:w -w mycore & npm run start:dev -w nestjs",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
   },
   "workspaces": [
     "./src/@core",
