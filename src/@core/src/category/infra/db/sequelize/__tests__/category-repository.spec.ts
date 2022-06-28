@@ -9,7 +9,7 @@ describe('CategorySequelizeRepository Integration Tests', () => {
 
     let repository: CategorySequelizeRepository;
 
-    beforeEach(async () => {
+    beforeEach(() => {
         repository = new CategorySequelizeRepository(CategoryModel);
     });
 
