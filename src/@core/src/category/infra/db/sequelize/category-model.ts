@@ -3,7 +3,7 @@ import { Column, DataType, PrimaryKey, Table, Model } from 'sequelize-typescript
 import _chance from 'chance';
 
 const chance = _chance();
-type CategoryModelProperties = {
+type CategoryModelProps = {
     id: string;
     name: string;
     description: string | null;
@@ -12,7 +12,7 @@ type CategoryModelProperties = {
 };
 
 @Table({ tableName: 'categories', timestamps: false })
-export class CategoryModel extends Model<CategoryModelProperties> {
+export class CategoryModel extends Model<CategoryModelProps> {
     @PrimaryKey
     @Column({ type: DataType.UUID })
     declare id: string;
@@ -30,7 +30,7 @@ export class CategoryModel extends Model<CategoryModelProperties> {
     declare created_at: Date;
 
     static factory() {
-        return new SequelizeModelFactory(CategoryModel, () => ({
+        return new SequelizeModelFactory<CategoryModel, CategoryModelProps>(CategoryModel, () => ({
             id: chance.guid({ version: 4 }),
             name: chance.word(),
             description: chance.paragraph(),

@@ -1,1 +1,1 @@
-export * from "./sequelize-model-factory";
+export * from './sequelize-model-factory';
