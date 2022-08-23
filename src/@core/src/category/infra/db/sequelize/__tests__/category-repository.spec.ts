@@ -1,14 +1,14 @@
-import { CategoryModel, CategoryModelMapper } from '#category/infra';
+import { CategorySequelize } from '#category/infra';
 import { Category, CategoryRepository } from '#category/domain';
-import { CategorySequelizeRepository } from '../category-repository';
 import { NotFoundError, UniqueEntityId } from '#shared/domain';
 import { setupSequelize } from '#shared/infra';
 import _chance from 'chance';
 
 const chance = _chance();
+const { CategoryModel, CategorySequelizeRepository, CategoryModelMapper } = CategorySequelize;
 describe('CategorySequelizeRepository Integration Tests', () => {
     setupSequelize({ models: [CategoryModel] });
-    let repository: CategorySequelizeRepository;
+    let repository: CategorySequelize.CategorySequelizeRepository;
 
     beforeEach(() => {
         repository = new CategorySequelizeRepository(CategoryModel);

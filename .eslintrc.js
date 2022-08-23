@@ -11,6 +11,7 @@ module.exports = {
     rules: {
         '@typescript-eslint/no-namespace': 'off',
         '@typescript-eslint/ban-ts-comment': 0,
+        '@typescript-eslint/no-var-requires': 0,
 
         // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
         // e.g. "@typescript-eslint/explicit-function-return-type": "off",

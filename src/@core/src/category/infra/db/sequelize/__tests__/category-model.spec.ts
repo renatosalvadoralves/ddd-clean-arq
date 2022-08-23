@@ -1,13 +1,13 @@
 import { DataType } from 'sequelize-typescript';
-import { CategoryModel } from '#category/infra';
+import { CategorySequelize } from '#category/infra';
 import { setupSequelize } from '#shared/infra';
 
 describe('CategoryModel Unit Tests', () => {
-    setupSequelize({ models: [CategoryModel] });
+    setupSequelize({ models: [CategorySequelize.CategoryModel] });
 
     test('mapping props', () => {
-        const attributesMap = CategoryModel.getAttributes();
-        const attributes = Object.keys(CategoryModel.getAttributes());
+        const attributesMap = CategorySequelize.CategoryModel.getAttributes();
+        const attributes = Object.keys(CategorySequelize.CategoryModel.getAttributes());
 
         expect(attributes).toStrictEqual(['id', 'name', 'description', 'is_active', 'created_at']);
 
@@ -56,7 +56,7 @@ describe('CategoryModel Unit Tests', () => {
             created_at: new Date(),
         };
 
-        const category = await CategoryModel.build(arrange).save();
+        const category = await CategorySequelize.CategoryModel.build(arrange).save();
         expect(category.toJSON()).toStrictEqual(arrange);
     });
 });

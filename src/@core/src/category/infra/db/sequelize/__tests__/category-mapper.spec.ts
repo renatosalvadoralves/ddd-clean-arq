@@ -1,9 +1,9 @@
-import { CategoryModel } from '#category/infra';
-import { CategoryModelMapper } from '../category-mapper';
+import { CategorySequelize } from '#category/infra';
 import { LoadEntityError, UniqueEntityId } from '#shared/domain';
 import { Category } from '#category/domain';
 import { setupSequelize } from '#shared/infra';
 
+const { CategoryModel, CategoryModelMapper } = CategorySequelize;
 describe('CategoryModelMapper Unit Tests', () => {
     setupSequelize({ models: [CategoryModel] });
     it('should throws error when category is invalid', () => {
