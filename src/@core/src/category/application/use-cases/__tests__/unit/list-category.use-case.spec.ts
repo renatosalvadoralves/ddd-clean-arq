@@ -1,5 +1,4 @@
-import { Category } from '#category/domain';
-import { CategoryRepository } from '#category/domain';
+import { Category, CategoryRepository } from '#category/domain';
 import { CategoryInMemoryRepository } from '#category/infra';
 import { ListCategoryUseCase } from '#category/application';
 
