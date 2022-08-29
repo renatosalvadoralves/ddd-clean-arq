@@ -1,1 +1,3 @@
-export * from "./helpers";
+// created from 'create-ts-index'
+
+export * from './helpers';

@@ -17,7 +17,7 @@ describe('ListCategoryUseCase Integration Tests', () => {
     });
 
     it('should return output using empty input with categories ordered by created_at', async () => {
-        const models = await CategoryModel.factory()
+        const models: any = await CategoryModel.factory()
             .count(2)
             .bulkCreate((index: number) => {
                 const chance = _chance();
@@ -45,7 +45,7 @@ describe('ListCategoryUseCase Integration Tests', () => {
     });
 
     it('should returns output using pagination, sort and filter', async () => {
-        const models = CategoryModel.factory().count(5).bulkMake();
+        const models: any = CategoryModel.factory().count(5).bulkMake();
 
         models[0].name = 'a';
         models[1].name = 'AAA';

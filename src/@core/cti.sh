@@ -3,7 +3,7 @@
 #! -- -i '*spec.ts' -b not add for test files and -b to ignore backup files
 
 npm run cti create './src/shared/application' -- -i '*spec.ts' -b && 
-npm run cti create './src/shared/domain' -- -i '*spec.ts' -b && 
+npm run cti create './src/shared/domain' -- -i '*spec.ts' -e 'tests' -b && 
 npm run cti create './src/shared/infra' -- -i '*spec.ts' -b && 
 
 npm run cti create './src/category/application' -- -i '*spec.ts' -b && 

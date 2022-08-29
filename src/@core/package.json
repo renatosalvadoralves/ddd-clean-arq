@@ -54,7 +54,7 @@
     "test:watch": "npm run test --watchAll",
     "test:coverage": "npm run test -- --coverage",
     "cti": "cti",
-    "cti:@core": "sh ./cti.sh"
+    "cti:make": "sh ./cti.sh"
   },
   "author": "",
   "license": "ISC",
