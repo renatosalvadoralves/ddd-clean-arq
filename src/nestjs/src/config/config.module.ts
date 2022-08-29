@@ -45,18 +45,18 @@ export type CONFIG_SCHEMA_TYPE = DB_SCHEMA_TYPE;
 @Module({})
 export class ConfigModule extends NestConfigModule {
   static forRoot(options: ConfigModuleOptions = {}): DynamicModule {
+    const { envFilePath, ...otherOptions } = options;
     return super.forRoot({
+      isGlobal: true,
       envFilePath: [
-        ...(Array.isArray(options.envFilePath)
-          ? options.envFilePath
-          : [options.envFilePath]),
+        ...(Array.isArray(envFilePath) ? envFilePath : [envFilePath]),
         join(__dirname, `../envs/.env.${process.env.NODE_ENV}`),
         join(__dirname, '../envs/.env'),
       ],
       validationSchema: Joi.object({
         ...CONFIG_DB_SCHEMA,
       }),
-      ...options,
+      ...otherOptions,
     });
   }
 }
