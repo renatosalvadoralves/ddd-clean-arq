@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { CategorySequelize } from 'mycore/category/infra';
-import { CONFIG_SCHEMA_TYPE } from 'src/config/config.module';
+import { CONFIG_SCHEMA_TYPE } from '../config/config.module';
 
 @Module({
   imports: [

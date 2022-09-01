@@ -5,7 +5,7 @@ export default {
   },
   moduleFileExtensions: ['js', 'json', 'ts'],
   rootDir: 'src',
-  testRegex: '.*\\.spec\\.ts$',
+  testRegex: '.*\\..*spec\\.ts$',
   transform: {
     '^.+\\.(t|j)s$': '@swc/jest',
   },
