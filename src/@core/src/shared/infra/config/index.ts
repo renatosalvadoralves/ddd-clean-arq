@@ -16,5 +16,13 @@ function makeConfig(envFile) {
 
 //const envTestingFile = join(__dirname, '../../../../.env.${process.env.NODE_ENV}');
 
-const envTestingFile = join(__dirname, '../../../../.env.test');
-export const configTest = makeConfig(envTestingFile);
+const envTestingFile = join(__dirname, '../../../../.env.testing');
+let configTest = null;
+
+export const getConfig = () => {
+    if (!configTest) {
+        configTest = makeConfig(envTestingFile);
+    }
+
+    return configTest;
+};

@@ -10,7 +10,7 @@ describe('DatabaseModule Unit Tests', () => {
     const connOptions = {
       DB_VENDOR: 'sqlite',
       DB_HOST: ':memory:',
-      DB_LOGGING: true,
+      DB_LOGGING: false,
       DB_AUTO_LOAD_MODELS: true,
     };
     it('should be valid', () => {
