@@ -4,6 +4,7 @@ import {
   ListCategoryUseCase,
 } from 'mycore/category/application';
 import { SortDirection } from 'mycore/shared/domain';
+import { CategoryPresenter } from '../../presenter/category.presenter';
 import { CategoriesController } from '../../categories.controller';
 import { CreateCategoryDto } from '../../dto/create-category.dto';
 import { UpdateCategoryDto } from '../../dto/update-category.dto';
@@ -22,7 +23,7 @@ describe('CategoriesController Unit Tests', () => {
       is_active: true,
     };
 
-    const expectedOutput: CreateCategoryUseCase.Output = {
+    const output: CreateCategoryUseCase.Output = {
       id: 'ba9aa86c-06db-4e4e-a598-ed8b1da22307',
       name: 'John',
       description: 'some description',
@@ -31,15 +32,16 @@ describe('CategoriesController Unit Tests', () => {
 
     //@ts-expect-error
     const mockCreateUseCase = {
-      execute: jest.fn().mockReturnValue(Promise.resolve(expectedOutput)),
+      execute: jest.fn().mockReturnValue(Promise.resolve(output)),
     };
 
     //@ts-expect-error
     controller['createUseCase'] = mockCreateUseCase;
 
-    const output = await controller.create(input);
+    const presenter = await controller.create(input);
     expect(mockCreateUseCase.execute).toHaveBeenCalledWith(input);
-    expect(expectedOutput).toStrictEqual(output);
+    expect(presenter).toBeInstanceOf(CategoryPresenter);
+    expect(presenter).toStrictEqual(new CategoryPresenter(output));
   });
 
   it('should update a category', async () => {
