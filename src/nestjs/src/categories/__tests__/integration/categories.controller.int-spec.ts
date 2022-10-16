@@ -12,6 +12,7 @@ import {
 } from 'mycore/category/application';
 import { CategoryRepository } from 'mycore/category/domain';
 import { CATEGORY_PROVIDERS } from '../../category.providers';
+import { CategorySequelize } from 'mycore/category/infra';
 
 describe('CategoriesController Integration Tests', () => {
   let controller: CategoriesController;
@@ -86,6 +87,110 @@ describe('CategoriesController Integration Tests', () => {
       'with request $request',
       async ({ request, expectedPresenter }) => {
         const presenter = await controller.create(request);
+        const entity = await repository.findById(presenter.id);
+
+        expect(entity).toMatchObject({
+          id: presenter.id,
+          name: expectedPresenter.name,
+          description: expectedPresenter.description,
+          is_active: expectedPresenter.is_active,
+          created_at: presenter.created_at,
+        });
+
+        expect(presenter.id).toBe(entity.id);
+        expect(presenter.name).toBe(expectedPresenter.name);
+        expect(presenter.description).toBe(expectedPresenter.description);
+        expect(presenter.is_active).toBe(expectedPresenter.is_active);
+        expect(presenter.created_at).toStrictEqual(entity.created_at);
+      },
+    );
+  });
+
+  describe('should update a category', () => {
+    let category: CategorySequelize.CategoryModel;
+
+    beforeEach(async () => {
+      category = await CategorySequelize.CategoryModel.factory().create();
+    });
+
+    const arrange = [
+      {
+        categoriesProps: {
+          name: 'category test',
+        },
+        request: {
+          name: 'Movie',
+        },
+        expectedPresenter: {
+          name: 'Movie',
+          description: null,
+          is_active: true,
+        },
+      },
+      {
+        categoriesProps: {
+          name: 'category test',
+        },
+        request: {
+          name: 'Movie',
+          description: null,
+        },
+        expectedPresenter: {
+          name: 'Movie',
+          description: null,
+          is_active: true,
+        },
+      },
+      {
+        categoriesProps: {
+          name: 'category test',
+        },
+        request: {
+          name: 'Movie',
+          description: 'hello',
+        },
+        expectedPresenter: {
+          name: 'Movie',
+          description: 'hello',
+          is_active: true,
+        },
+      },
+      {
+        categoriesProps: {
+          name: 'category test',
+        },
+        request: {
+          name: 'Movie',
+          is_active: false,
+        },
+        expectedPresenter: {
+          name: 'Movie',
+          description: null,
+          is_active: false,
+        },
+      },
+      {
+        categoriesProps: {
+          name: 'category test',
+          is_active: false,
+        },
+        request: {
+          name: 'Movie',
+          is_active: true,
+        },
+        expectedPresenter: {
+          name: 'Movie',
+          description: null,
+          is_active: true,
+        },
+      },
+    ];
+
+    test.each(arrange)(
+      'with request $request',
+      async ({ categoriesProps, request, expectedPresenter }) => {
+        await category.update(categoriesProps);
+        const presenter = await controller.update(category.id, request);
         const entity = await repository.findById(presenter.id);
 
         expect(entity).toMatchObject({

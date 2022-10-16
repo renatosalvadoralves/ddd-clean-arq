@@ -1,4 +1,4 @@
-import {FieldsErrors} from "#shared/domain"
+import { FieldsErrors } from '#shared/domain';
 
 export class LoadEntityError extends Error {
     constructor(public error: FieldsErrors, message?: string) {

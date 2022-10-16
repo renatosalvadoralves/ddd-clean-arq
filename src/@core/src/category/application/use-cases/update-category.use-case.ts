@@ -10,7 +10,7 @@ export namespace UpdateCategoryUseCase {
             const entity = await this.categoryRepo.findById(input.id);
             entity.update(input.name, input.description);
 
-            if (!input.is_active === true) {
+            if (input.is_active === true) {
                 entity.activate();
             }
 
