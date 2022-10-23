@@ -13,6 +13,8 @@ import {
 import { CategoryRepository } from 'mycore/category/domain';
 import { CATEGORY_PROVIDERS } from '../../category.providers';
 import { CategorySequelize } from 'mycore/category/infra';
+import { NotFoundError } from 'mycore/shared/domain';
+import { CategoryPresenter } from '../../presenter/category.presenter';
 
 describe('CategoriesController Integration Tests', () => {
   let controller: CategoriesController;
@@ -97,6 +99,7 @@ describe('CategoriesController Integration Tests', () => {
           created_at: presenter.created_at,
         });
 
+        expect(presenter).toBeInstanceOf(CategoryPresenter);
         expect(presenter.id).toBe(entity.id);
         expect(presenter.name).toBe(expectedPresenter.name);
         expect(presenter.description).toBe(expectedPresenter.description);
@@ -201,6 +204,7 @@ describe('CategoriesController Integration Tests', () => {
           created_at: presenter.created_at,
         });
 
+        expect(presenter).toBeInstanceOf(CategoryPresenter);
         expect(presenter.id).toBe(entity.id);
         expect(presenter.name).toBe(expectedPresenter.name);
         expect(presenter.description).toBe(expectedPresenter.description);
@@ -208,5 +212,28 @@ describe('CategoriesController Integration Tests', () => {
         expect(presenter.created_at).toStrictEqual(entity.created_at);
       },
     );
+  });
+
+  it('should delete a category', async () => {
+    const category = await CategorySequelize.CategoryModel.factory().create();
+    const response = await controller.remove(category.id);
+
+    expect(response).not.toBeDefined();
+
+    await expect(repository.findById(category.id)).rejects.toThrow(
+      new NotFoundError(`Entity not found using ID: ${category.id}`),
+    );
+  });
+
+  it('should get a category', async () => {
+    const category = await CategorySequelize.CategoryModel.factory().create();
+    const presenter = await controller.findOne(category.id);
+
+    expect(presenter).toBeInstanceOf(CategoryPresenter);
+    expect(presenter.id).toBe(category.id);
+    expect(presenter.name).toBe(category.name);
+    expect(presenter.description).toBe(category.description);
+    expect(presenter.is_active).toBe(category.is_active);
+    expect(presenter.created_at).toStrictEqual(category.created_at);
   });
 });

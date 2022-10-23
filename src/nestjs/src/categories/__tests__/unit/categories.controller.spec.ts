@@ -52,7 +52,7 @@ describe('CategoriesController Unit Tests', () => {
       is_active: true,
     };
 
-    const expectedOutput: CreateCategoryUseCase.Output = {
+    const output: CreateCategoryUseCase.Output = {
       id,
       name: 'John',
       description: 'some description',
@@ -61,14 +61,15 @@ describe('CategoriesController Unit Tests', () => {
     };
 
     const mockUpdateUseCase = {
-      execute: jest.fn().mockReturnValue(Promise.resolve(expectedOutput)),
+      execute: jest.fn().mockReturnValue(Promise.resolve(output)),
     };
     //@ts-expect-error
     controller['updateUseCase'] = mockUpdateUseCase;
 
-    const output = await controller.update(id, input);
+    const presenter = await controller.update(id, input);
     expect(mockUpdateUseCase.execute).toHaveBeenCalledWith({ id, ...input });
-    expect(expectedOutput).toStrictEqual(output);
+    expect(presenter).toBeInstanceOf(CategoryPresenter);
+    expect(presenter).toStrictEqual(new CategoryPresenter(output));
   });
 
   it('should delete a category', async () => {
@@ -89,7 +90,7 @@ describe('CategoriesController Unit Tests', () => {
   it('should gets a category', async () => {
     const id = 'ba9aa86c-06db-4e4e-a598-ed8b1da22307';
 
-    const expectedOutput: GetCategoryUseCase.Output = {
+    const output: GetCategoryUseCase.Output = {
       id,
       name: 'Movie',
       description: 'some description',
@@ -98,13 +99,14 @@ describe('CategoriesController Unit Tests', () => {
     };
 
     const mockGetUseCase = {
-      execute: jest.fn().mockReturnValue(Promise.resolve(expectedOutput)),
+      execute: jest.fn().mockReturnValue(Promise.resolve(output)),
     };
     //@ts-expect-error
     controller['getUseCase'] = mockGetUseCase;
-    const output = await controller.findOne(id);
+    const presenter = await controller.findOne(id);
     expect(mockGetUseCase.execute).toHaveBeenCalledWith({ id });
-    expect(expectedOutput).toStrictEqual(output);
+    expect(presenter).toBeInstanceOf(CategoryPresenter);
+    expect(presenter).toStrictEqual(new CategoryPresenter(output));
   });
 
   it('should list categories', async () => {
