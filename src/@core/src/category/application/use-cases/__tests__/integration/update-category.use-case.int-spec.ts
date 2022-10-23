@@ -88,7 +88,7 @@ describe('UpdateCategoryUseCase Integration Tests', () => {
                     id: model.id,
                     name: 'test updated',
                     description: null,
-                    is_active: true,
+                    is_active: false,
                     created_at: model.created_at,
                 },
             },

@@ -89,7 +89,7 @@ describe('UpdateCategoryUseCase Unit Tests', () => {
                     id: entity.id,
                     name: 'test updated',
                     description: null,
-                    is_active: true,
+                    is_active: false,
                     created_at: entity.created_at,
                 },
             },
