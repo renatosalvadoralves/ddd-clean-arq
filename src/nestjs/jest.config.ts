@@ -10,7 +10,6 @@ export default {
     '^.+\\.(t|j)s$': '@swc/jest',
   },
   collectCoverageFrom: ['**/*.(t|j)s'],
-  coverageDirectory: '../coverage',
   testEnvironment: 'node',
   moduleNameMapper: {
     'mycore/(.*)': '<rootDir>/../../../node_modules/mycore/dist/$1',
@@ -22,4 +21,14 @@ export default {
     '../../@core/src/shared/domain/tests/setup.ts',
     '../../@core/src/shared/domain/tests/jest.ts',
   ],
+  coverageDirectory: '../coverage',
+  coverageProvider: 'v8',
+  coverageThreshold: {
+    global: {
+      statements: 80,
+      branches: 80,
+      functions: 80,
+      lines: 80,
+    },
+  },
 };
