@@ -10,9 +10,8 @@ import {
   ListCategoryUseCase,
   UpdateCategoryUseCase,
 } from 'mycore/category/application';
-import { CategoryRepository } from 'mycore/category/domain';
+import { CategoryRepository, Category } from 'mycore/category/domain';
 import { CATEGORY_PROVIDERS } from '../../category.providers';
-import { CategorySequelize } from 'mycore/category/infra';
 import { NotFoundError } from 'mycore/shared/domain';
 import { CategoryPresenter } from '../../presenter/category.presenter';
 
@@ -110,17 +109,14 @@ describe('CategoriesController Integration Tests', () => {
   });
 
   describe('should update a category', () => {
-    let category: CategorySequelize.CategoryModel;
+    const category = Category.fake().aCategory().build();
 
     beforeEach(async () => {
-      category = await CategorySequelize.CategoryModel.factory().create();
+      await repository.insert(category);
     });
 
     const arrange = [
       {
-        categoriesProps: {
-          name: 'category test',
-        },
         request: {
           name: 'Movie',
         },
@@ -131,9 +127,6 @@ describe('CategoriesController Integration Tests', () => {
         },
       },
       {
-        categoriesProps: {
-          name: 'category test',
-        },
         request: {
           name: 'Movie',
           description: null,
@@ -145,9 +138,6 @@ describe('CategoriesController Integration Tests', () => {
         },
       },
       {
-        categoriesProps: {
-          name: 'category test',
-        },
         request: {
           name: 'Movie',
           description: 'hello',
@@ -159,9 +149,6 @@ describe('CategoriesController Integration Tests', () => {
         },
       },
       {
-        categoriesProps: {
-          name: 'category test',
-        },
         request: {
           name: 'Movie',
           is_active: false,
@@ -173,10 +160,6 @@ describe('CategoriesController Integration Tests', () => {
         },
       },
       {
-        categoriesProps: {
-          name: 'category test',
-          is_active: false,
-        },
         request: {
           name: 'Movie',
           is_active: true,
@@ -184,6 +167,17 @@ describe('CategoriesController Integration Tests', () => {
         expectedPresenter: {
           name: 'Movie',
           description: null,
+          is_active: true,
+        },
+      },
+      {
+        request: {
+          name: 'Movie',
+          description: 'description test',
+        },
+        expectedPresenter: {
+          name: 'Movie',
+          description: 'description test',
           is_active: true,
         },
       },
@@ -191,8 +185,7 @@ describe('CategoriesController Integration Tests', () => {
 
     test.each(arrange)(
       'with request $request',
-      async ({ categoriesProps, request, expectedPresenter }) => {
-        await category.update(categoriesProps);
+      async ({ request, expectedPresenter }) => {
         const presenter = await controller.update(category.id, request);
         const entity = await repository.findById(presenter.id);
 
@@ -215,7 +208,8 @@ describe('CategoriesController Integration Tests', () => {
   });
 
   it('should delete a category', async () => {
-    const category = await CategorySequelize.CategoryModel.factory().create();
+    const category = Category.fake().aCategory().build();
+    await repository.insert(category);
     const response = await controller.remove(category.id);
 
     expect(response).not.toBeDefined();
@@ -226,7 +220,9 @@ describe('CategoriesController Integration Tests', () => {
   });
 
   it('should get a category', async () => {
-    const category = await CategorySequelize.CategoryModel.factory().create();
+    const category = Category.fake().aCategory().build();
+
+    await repository.insert(category);
     const presenter = await controller.findOne(category.id);
 
     expect(presenter).toBeInstanceOf(CategoryPresenter);

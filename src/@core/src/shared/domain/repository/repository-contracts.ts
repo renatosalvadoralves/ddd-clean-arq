@@ -2,6 +2,7 @@ import { Entity, UniqueEntityId } from '#shared/domain';
 
 export interface RepositoryInterface<T extends Entity> {
     insert(entity: T): Promise<void>;
+    bulkInsert(entities: T[]): Promise<void>;
     findById(id: string | UniqueEntityId): Promise<T>;
     findAll(): Promise<T[]>;
     update(entity: T): Promise<void>;

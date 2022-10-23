@@ -1,5 +1,5 @@
 import { UniqueEntityId, Entity, EntityValidationError } from '#shared/domain';
-import { CategoryValidatorFactory } from '#category/domain';
+import { CategoryFakeBuilder, CategoryValidatorFactory } from '#category/domain';
 
 export type CategoryProperties = {
     name: string;
@@ -72,5 +72,9 @@ export class Category extends Entity<CategoryProperties> {
 
     get created_at() {
         return this.props.created_at;
+    }
+
+    static fake() {
+        return CategoryFakeBuilder;
     }
 }

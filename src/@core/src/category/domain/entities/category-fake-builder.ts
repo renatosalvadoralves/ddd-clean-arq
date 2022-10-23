@@ -2,7 +2,7 @@ import { UniqueEntityId } from '#shared/domain';
 import { Chance } from 'chance';
 import { Category } from './category';
 
-type PropOrFactory<T> = T | ((index) => T);
+type PropOrFactory<T> = T | ((index: number) => T);
 
 export class CategoryFakeBuilder<TBuild = any> {
     private chance: Chance.Chance;
@@ -22,7 +22,8 @@ export class CategoryFakeBuilder<TBuild = any> {
         return new CategoryFakeBuilder<Category[]>(countObjs);
     }
 
-    constructor(countObjs = 1) {
+    // CategoryFakeBuilder nao pode ser instanciada so atraves de aCategory/theCategories
+    private constructor(countObjs = 1) {
         this.countObjs = countObjs;
         this.chance = Chance();
     }
@@ -90,13 +91,15 @@ export class CategoryFakeBuilder<TBuild = any> {
     build(): TBuild {
         const categories = new Array(this.countObjs).fill(undefined).map(
             (_, i) =>
-                new Category({
-                    ...(this._unique_entity_id && { unique_entity_id: this.callFactory(this._unique_entity_id, i) }),
-                    ...(this._created_at && { created_at: this.callFactory(this._created_at, i) }),
-                    name: this.callFactory(this._name, i),
-                    description: this.callFactory(this._description, i),
-                    is_active: this.callFactory(this._is_active, i),
-                }),
+                new Category(
+                    {
+                        ...(this._created_at && { created_at: this.callFactory(this._created_at, i) }),
+                        name: this.callFactory(this._name, i),
+                        description: this.callFactory(this._description, i),
+                        is_active: this.callFactory(this._is_active, i),
+                    },
+                    !this._unique_entity_id ? undefined : this.callFactory(this._unique_entity_id, i),
+                ),
         );
 
         return this.countObjs === 1 ? (categories[0] as any) : categories;

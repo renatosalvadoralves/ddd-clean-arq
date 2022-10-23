@@ -73,6 +73,10 @@ export namespace CategorySequelize {
             return CategoryModelMapper.toEntity(model);
         }
 
+        async bulkInsert(entities: Category[]): Promise<void> {
+            await this.categoryModel.bulkCreate(entities.map((e) => e.toJSON()));
+        }
+
         async findAll(): Promise<Category[]> {
             const models = await this.categoryModel.findAll();
             return models.map((m) => CategoryModelMapper.toEntity(m));
