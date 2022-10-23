@@ -4,7 +4,10 @@ import {
   ListCategoryUseCase,
 } from 'mycore/category/application';
 import { SortDirection } from 'mycore/shared/domain';
-import { CategoryPresenter } from '../../presenter/category.presenter';
+import {
+  CategoryCollectionPresenter,
+  CategoryPresenter,
+} from '../../presenter/category.presenter';
 import { CategoriesController } from '../../categories.controller';
 import { CreateCategoryDto } from '../../dto/create-category.dto';
 import { UpdateCategoryDto } from '../../dto/update-category.dto';
@@ -110,7 +113,7 @@ describe('CategoriesController Unit Tests', () => {
   });
 
   it('should list categories', async () => {
-    const expectedOutput: ListCategoryUseCase.Output = {
+    const output: ListCategoryUseCase.Output = {
       items: [
         {
           id: 'ba9aa86c-06db-4e4e-a598-ed8b1da22307',
@@ -134,12 +137,13 @@ describe('CategoriesController Unit Tests', () => {
     };
 
     const mockListUseCase = {
-      execute: jest.fn().mockReturnValue(Promise.resolve(expectedOutput)),
+      execute: jest.fn().mockReturnValue(Promise.resolve(output)),
     };
     //@ts-expect-error
     controller['listUseCase'] = mockListUseCase;
-    const output = await controller.search(searchParams);
+    const presenter = await controller.search(searchParams);
     expect(mockListUseCase.execute).toHaveBeenCalledWith(searchParams);
-    expect(expectedOutput).toStrictEqual(output);
+    expect(presenter).toBeInstanceOf(CategoryCollectionPresenter);
+    expect(presenter).toStrictEqual(new CategoryCollectionPresenter(output));
   });
 });

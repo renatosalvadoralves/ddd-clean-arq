@@ -131,7 +131,7 @@ export class CategoryFakeBuilder<TBuild = any> {
     private getValue(prop) {
         const optional = ['unique_entity_id', 'created_at'];
         const privateProp = `_${prop}`;
-        console.log(this[privateProp]);
+
         if (!this[privateProp] && optional.includes(prop)) {
             throw new Error(`Property ${prop} not have a factory, use 'with' methods`);
         }

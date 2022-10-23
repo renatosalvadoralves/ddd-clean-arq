@@ -24,7 +24,6 @@ describe('CategoryFakeBuilder Unit Tests', () => {
 
             faker.withUniqueEntityId(() => uniqueEntityId);
             expect(faker['_unique_entity_id']()).toBe(uniqueEntityId);
-            console.log(faker);
             expect(faker.unique_entity_id).toBe(uniqueEntityId);
         });
 
