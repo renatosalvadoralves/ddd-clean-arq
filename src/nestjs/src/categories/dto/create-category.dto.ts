@@ -1,7 +1,16 @@
 import { CreateCategoryUseCase } from 'mycore/category/application';
+import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateCategoryDto implements CreateCategoryUseCase.Input {
-    name: string;
-    description?: string;
-    is_active?: boolean;
+  @IsString()
+  @IsNotEmpty()
+  name: string;
+
+  @IsString()
+  @IsOptional()
+  description?: string;
+
+  @IsBoolean()
+  @IsOptional()
+  is_active?: boolean;
 }

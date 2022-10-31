@@ -1,9 +1,8 @@
 //export class UpdateCategoryDto extends PartialType(CreateCategoryDto) {}
 
 import { UpdateCategoryUseCase } from 'mycore/category/application';
+import { CreateCategoryDto } from './create-category.dto';
 
-export class UpdateCategoryDto implements Omit<UpdateCategoryUseCase.Input, 'id'> {
-    name: string;
-    description?: string;
-    is_active?: boolean;
-}
+export class UpdateCategoryDto
+  extends CreateCategoryDto
+  implements Omit<UpdateCategoryUseCase.Input, 'id'> {}
