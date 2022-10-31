@@ -36,6 +36,47 @@ describe('CategoriesController (e2e)', () => {
   const uuid = 'a99e642f-1ef4-415d-97bd-82b98002b457';
 
   describe('PUT /categories/:id', () => {
+    describe('should a response error with id is invalid or not found', () => {
+      const app = startApp();
+      const faker = Category.fake().aCategory().build();
+
+      const arrange = [
+        {
+          id: 'a99e642f-1ef4-415d-97bd-82b98002b452',
+          send_data: {
+            name: faker.name,
+          },
+          expected: {
+            message:
+              'Entity not found using ID: a99e642f-1ef4-415d-97bd-82b98002b452',
+            statusCode: 404,
+            error: 'Not Found',
+          },
+        },
+        {
+          id: 'fake id',
+          send_data: {
+            name: faker.name,
+          },
+          expected: {
+            statusCode: 422,
+            message: 'Validation failed (uuid  is expected)',
+            error: 'Unprocessable Entity',
+          },
+        },
+      ];
+
+      test.each(arrange)(
+        'when id is $id',
+        async ({ id, send_data, expected }) => {
+          return request(app.app.getHttpServer())
+            .put(`/categories/${id}`)
+            .send(send_data)
+            .expect(expected.statusCode)
+            .expect(expected);
+        },
+      );
+    });
     describe('should a response error with 422 when throw EntityValidationError', () => {
       const app = startApp({
         beforeInit: (app) => {
