@@ -9,3 +9,15 @@ services:
       - .:/home/node/app
     ports:
       - 3000:3000
+
+  db:
+    platform: linux/x86_64
+    image: mysql:5.7
+    container_name: 'micro-videos-typescript-db'
+    ports:
+      - 3306:3036
+    environment:
+      - MYSQL_DATABASE=micro_videos
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ./.docker/dbdata:/var/lib/mysql:delegated

@@ -1,5 +1,7 @@
 .history/
-node_modules
+.docker/zsh/history/.zsh_history
+.docker/dbdata
+node_modules/
 tsconfig.tsbuildinfo
 __coverage
 dist
