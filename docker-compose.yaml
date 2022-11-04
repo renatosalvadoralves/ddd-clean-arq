@@ -17,7 +17,7 @@ services:
     image: mysql:5.7
     container_name: 'micro-videos-typescript-db'
     ports:
-      - 3306:3036
+      - 3306:3306
     environment:
       - MYSQL_DATABASE=micro_videos
       - MYSQL_ROOT_PASSWORD=root
