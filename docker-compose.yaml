@@ -5,6 +5,8 @@ services:
     build: .
     container_name: 'micro-videos-typescript-app'
     command: ./start.sh
+    links:
+      - "db"
     volumes:
       - .:/home/node/app
     ports:
