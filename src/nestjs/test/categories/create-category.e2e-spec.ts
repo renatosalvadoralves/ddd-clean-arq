@@ -8,7 +8,7 @@ import { getConnectionToken } from '@nestjs/sequelize';
 import { startApp } from '../../src/@share/testing';
 
 describe('CategoriesController (e2e)', () => {
-  describe('POST /categories', () => {
+  describe('/categories (POST)', () => {
     describe('should a response error with 422 when throw EntityValidationError', () => {
       const app = startApp({
         beforeInit: (app) => {
@@ -80,11 +80,10 @@ describe('CategoriesController (e2e)', () => {
             categoryCreated.toJSON(),
           );
           const serialized = instanceToPlain(presenter);
-          //expect(res.body.data).toStrictEqual(serialized);
 
-          expect(res.body.data).toMatchObject({
+          expect(res.body.data).toStrictEqual({
             id: serialized.id,
-            //created_at: serialized.created_at,
+            created_at: serialized.created_at,
             ...send_data,
             ...expected,
           });

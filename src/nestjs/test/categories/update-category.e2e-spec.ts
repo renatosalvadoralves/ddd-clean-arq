@@ -10,7 +10,7 @@ import { startApp } from '../../src/@share/testing';
 describe('CategoriesController (e2e)', () => {
   const uuid = 'a99e642f-1ef4-415d-97bd-82b98002b457';
 
-  describe('PUT /categories/:id', () => {
+  describe('/categories/:id (PUT)', () => {
     describe('should a response error with id is invalid or not found', () => {
       const app = startApp();
       const faker = Category.fake().aCategory().build();

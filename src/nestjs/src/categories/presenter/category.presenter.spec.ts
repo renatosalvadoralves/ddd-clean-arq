@@ -40,7 +40,7 @@ describe('CategoryPresenter Unit Tests', () => {
         name: 'movie',
         description: 'some description',
         is_active: true,
-        created_at: created_at.toISOString(),
+        created_at: created_at.toISOString().slice(0, 19) + '.000Z',
       });
     });
   });
@@ -112,7 +112,7 @@ describe('CategoryCollectionPresenter Unit Tests', () => {
           name: 'Movie',
           description: 'A movie category',
           is_active: true,
-          created_at: created_at.toISOString(),
+          created_at: created_at.toISOString().slice(0, 19) + '.000Z',
         },
       ],
       meta: {
@@ -146,7 +146,7 @@ describe('CategoryCollectionPresenter Unit Tests', () => {
           name: 'Movie',
           description: 'A movie category',
           is_active: true,
-          created_at: created_at.toISOString(),
+          created_at: created_at.toISOString().slice(0, 19) + '.000Z',
         },
       ],
       meta: {
