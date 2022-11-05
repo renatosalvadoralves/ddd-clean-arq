@@ -46,15 +46,15 @@ describe('DatabaseModule Unit Tests', () => {
     });
   });
 
-  /* describe('mysql connection', () => {
+  describe('mysql connection', () => {
     const connOptions = {
       DB_VENDOR: 'mysql',
       DB_HOST: 'localhost',
-      DB_DATABASE: 'categories',
+      DB_DATABASE: 'micro_videos_test',
       DB_USERNAME: 'root',
       DB_PASSWORD: 'root',
       DB_PORT: 3306,
-      DB_LOGGING: true,
+      DB_LOGGING: false,
       DB_AUTO_LOAD_MODELS: true,
     };
     it('should be valid', () => {
@@ -64,9 +64,9 @@ describe('DatabaseModule Unit Tests', () => {
 
       const { error } = schema.validate(connOptions);
       expect(error).toBeUndefined();
-    }); */
+    });
 
-  /*  it('should be a sqlite connection', async () => {
+    it('should be a mysql connection', async () => {
       const module = await Test.createTestingModule({
         imports: [
           DatabaseModule,
@@ -86,13 +86,12 @@ describe('DatabaseModule Unit Tests', () => {
       expect(conn).toBeDefined();
       expect(conn.options.dialect).toBe('mysql');
       expect(conn.options.host).toBe('localhost');
-      expect(conn.options.database).toBe('categories');
+      expect(conn.options.database).toBe('micro_videos_test');
       expect(conn.options.username).toBe('root');
       expect(conn.options.password).toBe('root');
       expect(conn.options.port).toBe(3306);
 
       await conn.close();
-    }); */
-  /*   });
-   */
+    });
+  });
 });
