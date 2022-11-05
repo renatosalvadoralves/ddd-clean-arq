@@ -10,15 +10,14 @@ export default {
   },
   collectCoverageFrom: ['**/*.(t|j)s'],
   testEnvironment: 'node',
+  rootDir: 'src',
   moduleNameMapper: {
-    'mycore/(.*)': '<rootDir>/../../node_modules/mycore/dist/$1',
-    '#shared/(.*)$': '<rootDir>/../../node_modules/mycore/dist/shared/$1',
-    '#category/(.*)$': '<rootDir>/../../node_modules/mycore/dist/category/$1',
+    'mycore/(.*)': '<rootDir>/../../../node_modules/mycore/dist/$1',
+    '#shared/(.*)$': '<rootDir>/../../../node_modules/mycore/dist/shared/$1',
+    '#category/(.*)$':
+      '<rootDir>/../../../node_modules/mycore/dist/category/$1',
   },
-  setupFilesAfterEnv: [
-    '../@core/src/shared/domain/tests/setup.ts',
-    '../@core/src/shared/domain/tests/jest.ts',
-  ],
+  setupFilesAfterEnv: ['../../@core/src/shared/domain/tests/jest.ts'],
   coverageDirectory: '../coverage',
   coverageProvider: 'v8',
   coverageThreshold: {

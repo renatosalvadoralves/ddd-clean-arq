@@ -5,8 +5,6 @@ services:
     build: .
     container_name: 'micro-videos-typescript-app'
     command: ./start.sh
-    links:
-      - "db"
     volumes:
       - .:/home/node/app
     ports:
@@ -16,6 +14,8 @@ services:
     platform: linux/amd64
     image: mysql:5.7
     container_name: 'micro-videos-typescript-db'
+    profiles:
+      - dev
     ports:
       - 3306:3306
     environment:
@@ -23,4 +23,15 @@ services:
       - MYSQL_ROOT_PASSWORD=root
     volumes:
       - ./.docker/dbdata:/var/lib/mysql:delegated
-    command: --innodb-use-native-aio=0
+
+  db_test:
+    platform: linux/amd64
+    image: mysql:5.7
+    container_name: 'micro-videos-typescript-db-test'
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=micro_videos_test
+      - MYSQL_ROOT_PASSWORD=root
+    tmpfs:
+      - /var/lib/mysql
