@@ -1,12 +1,6 @@
 import request from 'supertest';
 import { Category, CategoryRepository } from 'mycore/category/domain';
 import { CATEGORY_PROVIDERS } from '../../src/categories/category.providers';
-import {
-  CategoryFixture,
-  ListCategoriesFixture,
-} from '../../src/categories/fixture';
-import { CategoriesController } from '../../src/categories/categories.controller';
-import { instanceToPlain } from 'class-transformer';
 import { startApp } from '../../src/@share/testing';
 import { NotFoundError } from 'rxjs';
 
