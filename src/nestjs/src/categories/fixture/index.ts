@@ -258,7 +258,7 @@ export class ListCategoriesFixture {
     const _entities = Category.fake()
       .theCategories(4)
       .withName((i) => i + '')
-      .withCreatedAt((i) => new Date(new Date().getTime() + i))
+      .withCreatedAt((i) => new Date(new Date().getTime() + i * 2000))
       .build();
 
     const entitiesMap = {
