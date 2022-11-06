@@ -54,8 +54,6 @@ describe('CategoriesController (e2e)', () => {
       let categoryRepo: CategoryRepository.Repository;
 
       beforeEach(async () => {
-        const sequelize = app.app.get(getConnectionToken());
-        await sequelize.sync({ force: true });
         categoryRepo = app.app.get<CategoryRepository.Repository>(
           CATEGORY_PROVIDERS.REPOSITORIES.CATEGORY_REPOSITORY.provide,
         );

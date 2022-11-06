@@ -110,8 +110,6 @@ describe('CategoriesController (e2e)', () => {
         categoryRepo = app.app.get<CategoryRepository.Repository>(
           CATEGORY_PROVIDERS.REPOSITORIES.CATEGORY_REPOSITORY.provide,
         );
-        const sequelize = app.app.get(getConnectionToken());
-        await sequelize.sync({ force: true });
       });
 
       const arrange = UpdateCategoryFixture.arrangeForSave();
