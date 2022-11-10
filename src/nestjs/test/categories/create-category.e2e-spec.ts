@@ -4,7 +4,6 @@ import { CATEGORY_PROVIDERS } from '../../src/categories/category.providers';
 import { CreateCategoryFixture } from '../../src/categories/fixture';
 import { CategoriesController } from '../../src/categories/categories.controller';
 import { instanceToPlain } from 'class-transformer';
-import { getConnectionToken } from '@nestjs/sequelize';
 import { startApp } from '../../src/@share/testing';
 
 describe('CategoriesController (e2e)', () => {

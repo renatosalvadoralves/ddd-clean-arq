@@ -53,7 +53,7 @@ describe('DatabaseModule Unit Tests', () => {
       DB_DATABASE: 'micro_videos_test',
       DB_USERNAME: 'root',
       DB_PASSWORD: 'root',
-      DB_PORT: 3306,
+      DB_PORT: 3307,
       DB_LOGGING: false,
       DB_AUTO_LOAD_MODELS: true,
     };
@@ -89,7 +89,7 @@ describe('DatabaseModule Unit Tests', () => {
       expect(conn.options.database).toBe('micro_videos_test');
       expect(conn.options.username).toBe('root');
       expect(conn.options.password).toBe('root');
-      expect(conn.options.port).toBe(3306);
+      expect(conn.options.port).toBe(3307);
 
       await conn.close();
     });
