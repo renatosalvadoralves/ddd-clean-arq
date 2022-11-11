@@ -18,12 +18,12 @@ use <database_name>;
 
 -   Check pending
 
-    Ex: `node_modules/.bin/ts-node src/@core/src/shared/infra/db/sequelize/migrator.ts pending`
+    Ex: `npm run migrate -w mycore pending`
 
 -   UP
 
-    Ex: `node_modules/.bin/ts-node src/@core/src/shared/infra/db/sequelize/migrator.ts up`
+    Ex: `npm run migrate -w mycore up`
 
 -   DOWN
 
-    Ex: `node_modules/.bin/ts-node src/@core/src/shared/infra/db/sequelize/migrator.ts down`
+    Ex: `npm run migrate -w mycore down`

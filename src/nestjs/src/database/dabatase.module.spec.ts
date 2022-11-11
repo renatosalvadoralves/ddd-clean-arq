@@ -49,11 +49,11 @@ describe('DatabaseModule Unit Tests', () => {
   describe('mysql connection', () => {
     const connOptions = {
       DB_VENDOR: 'mysql',
-      DB_HOST: 'localhost',
+      DB_HOST: 'host.docker.internal',
       DB_DATABASE: 'micro_videos_test',
       DB_USERNAME: 'root',
       DB_PASSWORD: 'root',
-      DB_PORT: 3307,
+      DB_PORT: 3306,
       DB_LOGGING: false,
       DB_AUTO_LOAD_MODELS: true,
     };
@@ -85,11 +85,11 @@ describe('DatabaseModule Unit Tests', () => {
 
       expect(conn).toBeDefined();
       expect(conn.options.dialect).toBe('mysql');
-      expect(conn.options.host).toBe('localhost');
+      expect(conn.options.host).toBe('host.docker.internal');
       expect(conn.options.database).toBe('micro_videos_test');
       expect(conn.options.username).toBe('root');
       expect(conn.options.password).toBe('root');
-      expect(conn.options.port).toBe(3307);
+      expect(conn.options.port).toBe(3306);
 
       await conn.close();
     });

@@ -26,7 +26,7 @@ export function startApp({
     try {
       if (canRunMigrations) {
         const umzug = migrator(sequelize, { logger: undefined });
-        await umzug.down({ to: 0 as any });
+        await sequelize.drop();
         await umzug.up();
       } else {
         await sequelize.sync({ force: true });

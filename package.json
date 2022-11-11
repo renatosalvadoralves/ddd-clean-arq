@@ -22,7 +22,7 @@
     "scripts": {
         "prestart:dev": "npm run build -w mycore",
         "start:dev": "npm run build:w -w mycore & npm run start:dev -w nestjs",
-        "test": "jest",
+        "test": "jest --runInBand --detectOpenHandles",
         "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
         "test:cov": "npm run test -- --coverage"
     },
